@@ -21,7 +21,7 @@ make run
 
 ## Resources
 
-- https://github.com/loveucifer/gevurah
+- [Gevurah - Software Rasterizer](https://github.com/loveucifer/gevurah)
 - [Gabriel Gambeta - 3D Graphics](https://gabrielgambetta.com)
 - [tinyrenderer](https://github.com/ssloay/tinyrenderer)
 - [Pikumas 3D Course](https://pikuma.com/pages/3d-math-graphics-programming-course)
