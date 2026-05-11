@@ -3,6 +3,11 @@
 
 #include "math.h"
 
+#define swap(a, b) _Generic(a, \
+    int*: int_swap, \
+    float*: float_swap \
+)(a, b)
+
 /////////////////////////////
 ///// Vectors ///////////////
 /////////////////////////////
@@ -71,12 +76,13 @@ static inline float vec2_dot(Vec2_t a, Vec2_t b){
 }
 
 static inline void vec2_normalize(Vec2_t *v){
-    float length = sqrt(v->x * v->x + v->y * v->y );
+    float length = vec2_len(*v);
+    if(length == 0.0f) return;
     v->x /= length;
     v->y /= length;
 }
 
-static inline Vec2_t vec2_new(float x,  float y){
+static inline Vec2_t vec2_new(float x, float y){
     Vec2_t result = {x,y};
     return result;
 }
@@ -92,7 +98,7 @@ static inline Vec2_t vec2_clone(Vec2_t *v){
 /////////////////////////////////////
 
 
-static Vec3_t vec3_new(float x,  float y,float z){
+static Vec3_t vec3_new(float x, float y, float z){
     Vec3_t result = {x,y,z};
     return result;
 }
@@ -103,7 +109,7 @@ static Vec3_t vec3_clone(Vec3_t *v){
 }
 
 static float vec3_len(Vec3_t v){
-    return sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+    return sqrtf(v.x * v.x + v.y * v.y + v.z * v.z);
 };
 
 static Vec3_t vec3_add(Vec3_t a, Vec3_t b) {
@@ -157,7 +163,7 @@ static float vec3_dot(Vec3_t a, Vec3_t b){
 
 
 static void vec3_normalize(Vec3_t *v){
-    float length = sqrt(v->x * v->x + v->y * v->y +  v->z * v->z );
+    float length = vec3_len(*v);
     if (length == 0.0f) return;
     v->x /= length;
     v->y /= length;
