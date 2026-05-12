@@ -8,6 +8,21 @@
     float*: float_swap \
 )(a, b)
 
+#define vec_len(v) _Generic(v, \
+    Vec2_t: vec2_len, \
+    Vec3_t: vec3_len \
+)(v)
+
+#define clamp(value, min, max) _Generic(value, \
+    int: clamp_int, \
+    float: clamp_float \
+)(value, min, max)
+
+#define vec_add(v1, v2) _Generic(v1, \
+    Vec2_t: vec2_add, \
+    Vec3_t: vec3_add \
+)(v1, v2)
+
 /////////////////////////////
 ///// Vectors ///////////////
 /////////////////////////////
@@ -393,7 +408,26 @@ static float float_lerp(float a, float b , float t){
     return  a + t * (b - a);     /// interpolation formula
 }
 
+static Vec3_t vec3_lerp(Vec3_t a, Vec3_t b, float t){
+    Vec3_t result = {
+        .x = float_lerp(a.x, b.x, t),
+        .y = float_lerp(a.y, b.y, t),
+        .z = float_lerp(a.z, b.z, t)
+    };
+    return result;
+}
 
+static int clamp_int(int value, int min, int max){
+    if (value < min) return min;
+    if (value > max) return max;
+    return value;
+}
+
+static float clamp_float(float value, float min, float max){
+    if(value < min) return min;
+    if(value > max) return max;
+    return value;
+}
 
 //// baycentric weights ///
 
