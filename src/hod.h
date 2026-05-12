@@ -13,7 +13,7 @@
     Vec3_t: vec3_len \
 )(v)
 
-#define clamp(value, min, max) _Generic(value, \
+#define math_clamp(value, min, max) _Generic(value, \
     int: clamp_int, \
     float: clamp_float \
 )(value, min, max)
